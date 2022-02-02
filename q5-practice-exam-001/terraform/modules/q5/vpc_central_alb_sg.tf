@@ -12,6 +12,6 @@ resource aws_security_group_rule "vpc_central_ingress_to_alb" {
   cidr_blocks       = [var.network_cidr_all]
   from_port         = 443
   protocol          = "tcp"
-  security_group_id = aws_security_group.vpc_central_alb_sg
+  security_group_id = aws_security_group.vpc_central_alb_sg.id
   to_port           = 443
 }
