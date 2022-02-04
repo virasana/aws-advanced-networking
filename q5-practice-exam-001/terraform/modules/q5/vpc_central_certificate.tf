@@ -1,9 +1,13 @@
-resource "tls_self_signed_cert" "vpc_central_certificate" {
-  key_algorithm   = "ECDSA"
+resource "tls_private_key" "vpc_central_private_key" {
+  algorithm = "RSA"
+}
+
+resource "tls_self_signed_cert" "vpc_central_self_signed_cert" {
+  key_algorithm   = "RSA"
   private_key_pem = tls_private_key.vpc_central_private_key.private_key_pem
 
   subject {
-    common_name  = "q5.practice.exam.com"
+    common_name  = "q5.practice-exam.internal"
     organization = "Karunasoft Consulting Ltd"
   }
 
@@ -16,13 +20,7 @@ resource "tls_self_signed_cert" "vpc_central_certificate" {
   ]
 }
 
-resource "tls_private_key" "vpc_central_private_key" {
-  algorithm   = "ECDSA"
-  ecdsa_curve = "P384"
-}
-
-resource "aws_iam_server_certificate" "vpc_central_cert" {
-  name             = "vpc-central-cert"
-  certificate_body = tls_self_signed_cert.vpc_central_certificate.cert_pem
+resource "aws_acm_certificate" "vpc_central_cert" {
   private_key      = tls_private_key.vpc_central_private_key.private_key_pem
+  certificate_body = tls_self_signed_cert.vpc_central_self_signed_cert.cert_pem
 }
