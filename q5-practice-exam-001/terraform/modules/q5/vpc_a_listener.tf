@@ -1,6 +1,6 @@
 resource "aws_lb_listener" "vpc_a_listener" {
   load_balancer_arn = aws_lb.vpc_a_nlb.arn
-  port              = "80"
+  port              = "443"
   protocol          = "TLS"
   certificate_arn   = aws_acm_certificate.vpc_central_cert.arn
   alpn_policy       = "HTTP2Preferred"
