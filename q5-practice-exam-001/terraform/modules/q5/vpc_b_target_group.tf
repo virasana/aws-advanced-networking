@@ -3,6 +3,7 @@ resource "aws_lb_target_group" "vpc_b_target_group" {
   port     = 80
   protocol = "TLS"
   vpc_id   = aws_vpc.vpc_b.id
+  target_type = "ip"
   health_check {
     matcher = "200-399"
     interval = 30

@@ -4,6 +4,6 @@ resource "aws_key_pair" "ec2" {
   key_name = "ksone"
   tags     = merge(local.common_tags,
   {
-    Name = "key-pair-ec2"
+    Name = var.ec2_ssh_key_name
   })
 }

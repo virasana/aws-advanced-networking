@@ -1,11 +1,11 @@
 resource "aws_instance" "vpc_b_ec2" {
   ami                         = var.ec2_ami_type
   instance_type               = var.ec2_instance_type
-  associate_public_ip_address = "false"
+  associate_public_ip_address = "true"
   key_name                    = var.ec2_ssh_key_name
 
   vpc_security_group_ids = [
-    aws_security_group.vpc_b_sg.id
+    aws_security_group.vpc_b_sg_ec2.id
   ]
 
   availability_zone = var.vpc_b_availability_zone
@@ -16,13 +16,13 @@ resource "aws_instance" "vpc_b_ec2" {
     Name        = "vpc_b_ec2"
   })
   depends_on        = [
-    aws_security_group.vpc_b_sg
+    aws_security_group.vpc_b_sg_ec2
   ]
   user_data = <<EOF
 #!/bin/bash
 yum update
 yum install -y httpd
-echo "Welcome to vpc_b_ec2!" > /var/www/index.html
+echo "Welcome to vpc_b_ec2!" > /var/www/html/index.html
 systemctl start httpd
 systemctl enable httpd
 EOF
