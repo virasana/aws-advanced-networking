@@ -9,16 +9,16 @@ resource "aws_instance" "vpc_b_ec2" {
   ]
 
   availability_zone = var.vpc_b_availability_zone
-  subnet_id         = aws_subnet.vpc_b_subnet.id
-  private_ip        = var.vpc_b_ec2_private_ip
-  tags              = merge(local.common_tags,
+  subnet_id           = aws_subnet.vpc_b_subnet.id
+  private_ip          = var.vpc_b_ec2_private_ip
+  tags                = merge(local.common_tags,
   {
-    Name        = "vpc_b_ec2"
+    Name = "vpc_b_ec2"
   })
-  depends_on        = [
+  depends_on          = [
     aws_security_group.vpc_b_sg_ec2
   ]
-  user_data = <<EOF
+  user_data           = <<EOF
 #!/bin/bash
 yum update
 yum install -y httpd

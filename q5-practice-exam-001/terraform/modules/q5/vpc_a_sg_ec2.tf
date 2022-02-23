@@ -18,12 +18,12 @@ resource aws_security_group_rule "vpc_a_sg_ec2__rule_egress_all" {
 }
 
 resource aws_security_group_rule "vpc_a_sg_ec2_ingress_http" {
-  type                     = "ingress"
-  source_security_group_id = aws_security_group.vpc_a_sg_nlb.id
-  security_group_id        = aws_security_group.vpc_a_sg_ec2.id
-  from_port                = 0
-  to_port                  = 65535
-  protocol                 = "tcp"
+  type              = "ingress"
+  security_group_id = aws_security_group.vpc_a_sg_ec2.id
+  cidr_blocks       = ["${var.vpc_a_nlb_ip_address}/32"]
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "tcp"
 }
 
 

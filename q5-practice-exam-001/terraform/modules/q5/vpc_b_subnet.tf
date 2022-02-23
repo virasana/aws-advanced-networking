@@ -8,3 +8,4 @@ resource "aws_subnet" "vpc_b_subnet" {
   })
   cidr_block        = var.vpc_b_subnet_cidr_block
 }
+
