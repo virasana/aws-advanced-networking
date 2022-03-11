@@ -3,7 +3,6 @@ resource "aws_lb_listener" "vpc_a_listener" {
   port              = "443"
   protocol          = "TLS"
   certificate_arn   = aws_acm_certificate.vpc_central_cert.arn
-  alpn_policy       = "HTTP2Preferred"
 
   default_action {
     type             = "forward"

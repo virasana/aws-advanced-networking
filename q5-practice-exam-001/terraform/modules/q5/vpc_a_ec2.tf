@@ -23,7 +23,9 @@ resource "aws_instance" "vpc_a_ec2" {
 yum update
 yum install -y httpd
 echo "Welcome to vpc_a_ec2!" > /var/www/html/index.html
+yum install -y mod_ssl
 systemctl start httpd
 systemctl enable httpd
+
 EOF
 }

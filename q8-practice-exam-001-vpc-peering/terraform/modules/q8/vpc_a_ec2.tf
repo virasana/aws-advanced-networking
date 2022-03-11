@@ -18,12 +18,12 @@ resource "aws_instance" "vpc_a_ec2" {
   depends_on          = [aws_security_group.vpc_a_sg_ec2]
   user_data           = <<EOF
 #!/bin/bash
-yum update
-yum install -y httpd
-echo "Welcome to vpc_a_ec2!" > /var/www/html/index.html
-yum install -y mod_ssl
-systemctl start httpd
-systemctl enable httpd
-
+echo "*** INSTALLING HTTPD ***";
+yum update;
+yum install -y httpd;
+echo "Welcome to vpc_b_ec2\!" > /var/www/html/index.html;
+systemctl start httpd;
+systemctl enable httpd;
+echo "==> DONE";
 EOF
 }
