@@ -1,0 +1,1 @@
+../../config/dev/variables.tf
